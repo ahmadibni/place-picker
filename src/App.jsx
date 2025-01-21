@@ -12,13 +12,9 @@ import { useFetch } from "./hooks/useFetch.js";
 function App() {
   const selectedPlace = useRef();
 
-  const [userPlaces, setUserPlaces] = useState([]);
-  const [isFetching, setIsFetching] = useState(false);
-
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [errorFetchingState, setErrorFetchingState] = useState();
 
-  // useFetch();
+  useFetch();
 
   function handleStartRemovePlace(place) {
     setModalIsOpen(true);
