@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback, useEffect } from "react";
+import { useRef, useState, useCallback } from "react";
 
 import Places from "./components/Places.jsx";
 import Error from "./components/Error.jsx";
@@ -14,7 +14,13 @@ function App() {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  useFetch();
+  const {
+    isFetching,
+    errorFetchingState,
+    fetchedData: userPlaces,
+    setErrorFetchingState,
+    setFetchedData: setUserPlaces,
+  } = useFetch(fetchUserPlaces, []);
 
   function handleStartRemovePlace(place) {
     setModalIsOpen(true);

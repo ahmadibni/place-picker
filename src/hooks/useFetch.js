@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-export function useFetch(fetchfn) {
+export function useFetch(fetchfn, initial) {
   const [isFetching, setIsFetching] = useState(false);
   const [errorFetchingState, setErrorFetchingState] = useState();
-  const [data, setData] = useState();
+  const [fetchedData, setFetchedData] = useState(initial);
 
   useEffect(() => {
     async function fetchData() {
@@ -12,7 +12,7 @@ export function useFetch(fetchfn) {
       try {
         const places = await fetchfn();
 
-        setData(places);
+        setFetchedData(places);
       } catch (error) {
         setErrorFetchingState({
           message: error.message || "Failed fetching data",
@@ -24,5 +24,11 @@ export function useFetch(fetchfn) {
     fetchData();
   }, [fetchfn]);
 
-  
+  return {
+    isFetching,
+    errorFetchingState,
+    fetchedData,
+    setErrorFetchingState,
+    setFetchedData,
+  };
 }
