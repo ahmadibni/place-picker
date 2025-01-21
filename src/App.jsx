@@ -7,6 +7,7 @@ import DeleteConfirmation from "./components/DeleteConfirmation.jsx";
 import logoImg from "./assets/logo.png";
 import AvailablePlaces from "./components/AvailablePlaces.jsx";
 import { fetchUserPlaces, updateUserPlaces } from "./http.js";
+import { useFetch } from "./hooks/useFetch.js";
 
 function App() {
   const selectedPlace = useRef();
@@ -17,24 +18,7 @@ function App() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [errorFetchingState, setErrorFetchingState] = useState();
 
-  useEffect(() => {
-    async function fetchPlaces() {
-      setIsFetching(true);
-
-      try {
-        const places = await fetchUserPlaces();
-
-        setUserPlaces(places);
-      } catch (error) {
-        setErrorFetchingState({
-          message: error.message || "Failed deleting places",
-        });
-      }
-      setIsFetching(false);
-    }
-
-    fetchPlaces();
-  }, []);
+  // useFetch();
 
   function handleStartRemovePlace(place) {
     setModalIsOpen(true);
